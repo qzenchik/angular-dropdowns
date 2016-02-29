@@ -11,7 +11,7 @@
       '<div ng-class="{\'disabled\': dropdownDisabled}" class="wrap-dd-select" tabindex="0">',
       '<span class="selected">{{dropdownModel[labelField]}}</span>',
       '<ul class="dropdown">',
-      '<li ng-repeat="item in dropdownSelect"',
+      '<li ng-repeat="item in dropdownSelect | orderBy:orderByProperty"',
       ' class="dropdown-item"',
       ' dropdown-select-item="item"',
       ' dropdown-item-label="labelField">',
@@ -72,12 +72,14 @@
           dropdownSelect: '=',
           dropdownModel: '=',
           dropdownItemLabel: '@',
+          dropdownOrderBy: '@',
           dropdownOnchange: '&',
           dropdownDisabled: '='
         },
 
         controller: ['$scope', '$element', function ($scope, $element) {
           $scope.labelField = $scope.dropdownItemLabel || 'text';
+          $scope.orderByProperty = $scope.dropdownOrderBy || null;
 
           DropdownService.register($element);
 
